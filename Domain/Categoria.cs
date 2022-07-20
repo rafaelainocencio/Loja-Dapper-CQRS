@@ -7,6 +7,6 @@ namespace Loja.Domain
 {
     public class Categoria : BaseEntity
     {
-
+        public string Nome { get; set; }
     }
 }

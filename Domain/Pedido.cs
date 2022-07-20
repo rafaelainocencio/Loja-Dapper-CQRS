@@ -7,5 +7,6 @@ namespace Loja.Domain
 {
     public class Pedido
     {
+        public DateTime DataPedido { get; set; }
     }
 }
