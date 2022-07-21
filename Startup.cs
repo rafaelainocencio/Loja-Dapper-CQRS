@@ -1,5 +1,7 @@
+using Loja.Repositories.CategoriaContext;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,6 +26,8 @@ namespace Loja
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            services.AddSingleton<ICategoriaRepository, CategoriaRepository>();
+            //services.AddControllers().AddNewtonsoftJson();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,7 +53,13 @@ namespace Loja
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapRazorPages();
+                endpoints.MapGet("/", async context =>
+                {
+                    context.Response.Headers.Add("Content-Type", "text/html; charset=utf-8");
+                    await context.Response.WriteAsync("Loja API");
+                });
+
+                endpoints.MapControllers();
             });
         }
     }

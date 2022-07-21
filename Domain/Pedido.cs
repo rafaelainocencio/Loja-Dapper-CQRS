@@ -7,6 +7,11 @@ namespace Loja.Domain
 {
     public class Pedido
     {
+        public Pedido()
+        {
+            DataPedido = DateTime.UtcNow;
+        }
+
         public DateTime DataPedido { get; set; }
     }
 }
